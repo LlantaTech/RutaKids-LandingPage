@@ -82,8 +82,8 @@ npm run preview # Visualiza localmente el build de producción
 
 ¿Tienes dudas o sugerencias?
 
-- 📧 Email: [llantatech@gmail.com](mailto:llantatech@gmail.com)
-- 🌐 Sitio web: próximamente en [https://llantatech.com](https://llantatech.com)
+- 📧 Email: [llantatech@gmail.com](mailto:llantatech.pe@gmail.com)
+- 🌐 Sitio web: próximamente en [https://llantatech.pe.com](https://llantatech.pe.com)
 
 ---
 
@@ -93,7 +93,7 @@ npm run preview # Visualiza localmente el build de producción
 
 Este proyecto y su contenido están protegidos bajo derechos reservados. Queda prohibida la reproducción, distribución o modificación total o parcial del código y/o diseño sin autorización expresa de **LLantaTech**.
 
-Para solicitar permisos o licencias comerciales, contáctanos a través del correo: [llantatech@gmail.com](mailto:llantatech@gmail.com)
+Para solicitar permisos o licencias comerciales, contáctanos a través del correo: [llantatech.pe@gmail.com](mailto:llantatech.pe@gmail.com)
 
 ---
 
