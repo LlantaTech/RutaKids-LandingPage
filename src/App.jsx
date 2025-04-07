@@ -11,6 +11,7 @@ import ForSchool from "./components/homepage/ForSchool.jsx";
 import Contact from "./components/homepage/Contact.jsx";
 import Footer from "./components/ui/Footer.jsx";
 import AboutUs from "./components/homepage/AboutUs.jsx";
+import AboutTheProduct from "./components/homepage/AboutTheProduct.jsx";
 
 
 const App = () => {
@@ -56,6 +57,7 @@ const App = () => {
                 <ForParents forwardedRef={(el) => (sectionRefs.current[1] = el)}/>{" "}
                 <ForSchool forwardedRef={(el) => (sectionRefs.current[2] = el)}/>{" "}
                 <AboutUs/>
+                <AboutTheProduct forwardedRef={(el) => (sectionRefs.current[3] = el)}/>{" "}
                 <Contact/>
 
             </main>

@@ -1,49 +1,52 @@
 import { useEffect, useRef, useState } from "react";
+import AvatarBubble from "../ui/AvatarBubble";
+import gsap from "gsap";
 
-export default function TeamSection() {
-    const [selectedMember, setSelectedMember] = useState(null);
-    const playerRef = useRef(null);
-    const sectionRef = useRef(null);
+const team = [
+    {
+        name: "Lucía Torres",
+        role: "CEO",
+        bio: "Apasionada por la educación, lidera RutaKids desde sus raíces.",
+        image: "https://randomuser.me/api/portraits/women/44.jpg",
+        videoTimestamp: 5,
+    },
+    {
+        name: "Marco Ríos",
+        role: "Tech Lead",
+        bio: "Desarrollador fullstack y gurú de sistemas escalables.",
+        image: "https://randomuser.me/api/portraits/men/32.jpg",
+        videoTimestamp: 15,
+    },
+    {
+        name: "Camila Herrera",
+        role: "Diseño UI/UX",
+        bio: "Hace que RutaKids luzca y se sienta increíble.",
+        image: "https://randomuser.me/api/portraits/women/65.jpg",
+        videoTimestamp: 25,
+    },
+    {
+        name: "Luis Fernández",
+        role: "Frontend Dev",
+        bio: "React lover y optimizador de interfaces.",
+        image: "https://randomuser.me/api/portraits/men/51.jpg",
+        videoTimestamp: 35,
+    },
+    {
+        name: "Ana Velarde",
+        role: "Marketing",
+        bio: "Conecta RutaKids con los colegios del país.",
+        image: "https://randomuser.me/api/portraits/women/48.jpg",
+        videoTimestamp: 45,
+    },
+];
+
+export default function AboutUs() {
+    const [order, setOrder] = useState(team);
+    const [active, setActive] = useState(team[0]);
     const [player, setPlayer] = useState(null);
+    const sectionRef = useRef(null);
 
-    const team = [
-        {
-            name: "Lucía Torres",
-            role: "CEO",
-            bio: "Apasionada por la educación, lidera RutaKids desde sus raíces.",
-            image: "https://randomuser.me/api/portraits/women/44.jpg",
-            videoTimestamp: 10,
-        },
-        {
-            name: "Marco Ríos",
-            role: "Tech Lead",
-            bio: "Desarrollador fullstack y gurú de sistemas escalables.",
-            image: "https://randomuser.me/api/portraits/men/32.jpg",
-            videoTimestamp: 25,
-        },
-        {
-            name: "Camila Herrera",
-            role: "Diseño UI/UX",
-            bio: "Hace que RutaKids luzca y se sienta increíble.",
-            image: "https://randomuser.me/api/portraits/women/65.jpg",
-            videoTimestamp: 40,
-        },
-        {
-            name: "Luis Fernández",
-            role: "Frontend Dev",
-            bio: "React lover y optimizador de interfaces.",
-            image: "https://randomuser.me/api/portraits/men/51.jpg",
-            videoTimestamp: 55,
-        },
-        {
-            name: "Ana Velarde",
-            role: "Marketing",
-            bio: "Conecta RutaKids con los colegios del país.",
-            image: "https://randomuser.me/api/portraits/women/48.jpg",
-            videoTimestamp: 70,
-        },
-    ];
-
+    // Load YouTube API
     useEffect(() => {
         const tag = document.createElement("script");
         tag.src = "https://www.youtube.com/iframe_api";
@@ -58,68 +61,69 @@ export default function TeamSection() {
         };
     }, []);
 
+    // Play/pause on visibility
     useEffect(() => {
         if (!player) return;
 
         const observer = new IntersectionObserver(
             ([entry]) => {
-                if (entry.isIntersecting) {
-                    player.playVideo();
-                } else {
-                    player.pauseVideo();
-                }
+                if (entry.isIntersecting) player.playVideo();
+                else player.pauseVideo();
             },
-            { threshold: 0.4 }
+            { threshold: 0.5 }
         );
 
         if (sectionRef.current) observer.observe(sectionRef.current);
-
         return () => observer.disconnect();
     }, [player]);
 
-    // Mostrar miembro automáticamente en función del tiempo
+
     useEffect(() => {
         if (!player) return;
-
         const interval = setInterval(() => {
-            const currentTime = player.getCurrentTime();
+            const time = player.getCurrentTime();
+            const next = [...team].reverse().find((m) => time >= m.videoTimestamp);
+            if (next && next.name !== active.name) {
 
-            const current = [...team]
-                .reverse()
-                .find((m) => currentTime >= m.videoTimestamp);
-
-            if (current && current.name !== selectedMember?.name) {
-                setSelectedMember(current);
+                const idx = order.findIndex((m) => m.name === next.name);
+                const newOrder = [...order.slice(idx), ...order.slice(0, idx)];
+                setOrder(newOrder);
+                setActive(order[idx]);
             }
         }, 1000);
-
         return () => clearInterval(interval);
-    }, [player, selectedMember]);
+    }, [player, active]);
 
-    const handleSelect = (member) => {
-        setSelectedMember(member);
+
+    const updateActive = (name) => {
+        const idx = order.findIndex((m) => m.name === name);
+        const newOrder = [...order.slice(idx), ...order.slice(0, idx)];
+        setOrder(newOrder);
+        setActive(order[idx]);
         if (player) {
-            player.seekTo(member.videoTimestamp, true);
+            player.seekTo(order[idx].videoTimestamp, true);
         }
     };
 
+    const radius = 180; // más lejos del centro
+    const centerX = 210;
+    const centerY = 175;
+
     return (
         <section
-            id="team"
             ref={sectionRef}
-            className="bg-white py-24 px-6 md:px-20 w-full"
-        >
-            <h2 className="text-3xl md:text-5xl font-bold text-center mb-12">
+            className="py-24 px-4 md:px-20 bg-white"
+            id="#about-us">
+            <h2 className="text-4xl font-bold text-center mb-12">
                 Conoce al equipo detrás de <span className="text-blue-600">RutaKids</span>
             </h2>
 
-            <div className="flex flex-col md:flex-row gap-12 max-w-7xl mx-auto items-start">
+            <div className="flex flex-col md:flex-row gap-12 justify-center items-center">
                 {/* VIDEO */}
-                <div className="w-full md:w-2/3">
+                <div className="w-full md:w-2/3 max-w-xl">
                     <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
                         <iframe
                             id="team-video"
-                            ref={playerRef}
                             width="100%"
                             height="100%"
                             src="https://www.youtube.com/embed/mco3UX9SqDA?enablejsapi=1&version=3"
@@ -131,31 +135,40 @@ export default function TeamSection() {
                     </div>
                 </div>
 
-                {/* INFO PANEL */}
-                <div className="w-full md:w-1/3 space-y-6">
-                    <div className="grid grid-cols-3 gap-4">
-                        {team.map((member, idx) => (
-                            <img
-                                key={idx}
-                                src={member.image}
-                                alt={member.name}
-                                className={`rounded-full w-20 h-20 cursor-pointer border-2 ${
-                                    selectedMember?.name === member.name
-                                        ? "border-blue-600 scale-110"
-                                        : "border-transparent"
-                                } transition-all duration-300`}
-                                onClick={() => handleSelect(member)}
-                            />
-                        ))}
+                {/* CÍRCULO */}
+                <div className="relative w-[400px] h-[400px]">
+                    {/* Círculo central */}
+                    <div   className="absolute top-1/2 left-1/2 w-72 h-72 -translate-x-1/2 -translate-y-1/2
+             rounded-full bg-blue-50 flex flex-col justify-center items-center
+             text-center shadow-lg z-0" >
+                        <p className="font-semibold text-black text-lg">{active.name}</p>
+                        <p className="text-blue-600 text-sm">{active.role}</p>
+                        <p className="text-gray-600 text-xs mt-2 px-4">{active.bio}</p>
                     </div>
 
-                    {selectedMember && (
-                        <div className="mt-4 bg-blue-50 ap-4 rounded-lg shadow text-center">
-                            <h3 className="text-xl font-semibold text-gray-800">{selectedMember.name}</h3>
-                            <p className="text-blue-600 font-medium">{selectedMember.role}</p>
-                            <p className="text-sm text-gray-600 mt-2">{selectedMember.bio}</p>
-                        </div>
-                    )}
+                    {/* Avatares en media luna */}
+                    {order.map((member, idx) => {
+                        const stepAngle = Math.PI / (order.length - 1);
+                        const angle = stepAngle * idx - Math.PI / 2;
+                        const x = Math.cos(angle) * radius;
+                        const y = Math.sin(angle) * radius;
+
+                        return (
+                            <div
+                                key={member.name}
+                                style={{
+                                    transform: `translate(${centerX + x}px, ${centerY + y}px)`,
+                                }}
+                                className="absolute transition-all duration-700"
+                            >
+                                <AvatarBubble
+                                    image={member.image}
+                                    isActive={member.name === active.name}
+                                    onClick={() => updateActive(member.name)}
+                                />
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         </section>

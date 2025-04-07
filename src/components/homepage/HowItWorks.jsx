@@ -8,28 +8,28 @@ const steps = [
         description:
             "Los colegios registran a los estudiantes y asignan rutas y paradas para asegurar una experiencia segura desde el primer día.",
         icon: <FaUserCheck size={36} className="text-blue-600" />,
-        video: "https://media.giphy.com/media/QBd2kLB5qDmysEXre9/giphy.gif"
+        video: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmxjNWNnMTZ2bGY0bnVkYTQ4amNlcnNpMXIwMTlzY2hnZXJpMnVmNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l4FGEfO2es6g8w4AU/giphy.gif"
     },
     {
         title: "Monitoreo de ruta",
         description:
             "Monitorea en vivo el trayecto del bus escolar. Da a las familias la seguridad de saber dónde están sus hijos, en todo momento.",
         icon: <FaMapMarkedAlt size={36} className="text-blue-600" />,
-        video: "https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif"
+        video: "https://media.giphy.com/media/QBd2kLB5qDmysEXre9/giphy.gif"
     },
     {
         title: "Notificaciones automáticas",
         description:
             "Recibe alertas instantáneas cuando tu hijo sube o baja del bus. Porque cada segundo de tranquilidad cuenta.",
         icon: <FaBell size={36} className="text-blue-600" />,
-        video: "https://media.giphy.com/media/9J7tdYltWyXIY/giphy.gif"
+        video: "https://i.gifer.com/7SPR.gif"
     },
     {
         title: "Ingreso al colegio",
         description:
             "Confirma la llegada segura del estudiante al colegio. Seguridad garantizada desde el inicio hasta el aula.",
         icon: <FaSchool size={36} className="text-blue-600" />,
-        video: "https://media.giphy.com/media/3oEjHCWdU7F4nScFWM/giphy.gif"
+        video: "https://i.gifer.com/TngS.gif"
     }
 ];
 
