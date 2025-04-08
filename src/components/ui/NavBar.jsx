@@ -133,32 +133,20 @@ export default function NavBar({ sectionRefs }) {
                 className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-secondary-800 transition-all duration-300 group-hover:w-full"></span>
           </a>
 
-{/* <a href="#padres" className="relative group hidden md:inline-block">
-  <span>Para padres</span>
-  <span
-      className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-secondary-800 transition-all duration-300 group-hover:w-full"></span>
-</a>
-<a href="#colegios" className="relative group hidden md:inline-block">
-  <span>Para colegios</span>
-  <span
-      className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-secondary-800 transition-all duration-300 group-hover:w-full"></span>
-</a> */}
-
-          <a href="#about-us" className="relative group hidden md:inline-block">
-            <span> Sobre nosotros</span>
-            <span
-                className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-secondary-800 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-
-          <a href="#about-the-product" className="relative group hidden md:inline-block">
-            <span> Sobre el producto </span>
-            <span
-                className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-secondary-800 transition-all duration-300 group-hover:w-full"></span>
-          </a>
+      <a href="#padres" className="relative group hidden md:inline-block">
+        <span>Para padres</span>
+        <span
+            className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-secondary-800 transition-all duration-300 group-hover:w-full"></span>
+      </a>
+      <a href="#colegios" className="relative group hidden md:inline-block">
+        <span>Para colegios</span>
+        <span
+            className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-secondary-800 transition-all duration-300 group-hover:w-full"></span>
+      </a>
 
 
           <a href="#contactanos" className="relative group hidden md:inline-block">
-            <span>Contáctanos</span>
+            <span>Contáctenos</span>
             <span
                 className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-secondary-800 transition-all duration-300 group-hover:w-full"></span>
           </a>
