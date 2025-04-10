@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import heroImg from '/src/assets/images/heroLlanta.webp';
+import { useTranslation, Trans } from 'react-i18next';
 
 const Hero = () => {
+    const { t } = useTranslation('hero');
+
     return (
         <section
             id="hero"
@@ -33,7 +36,7 @@ const Hero = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8 }}
                         >
-                            El futuro del <span className="text-blue-600">transporte escolar</span> está en tus manos
+                            <Trans i18nKey="title" t={t} components={{ 1: <span className="text-blue-600" /> }} />
                         </motion.h1>
 
                         <motion.p
@@ -42,8 +45,7 @@ const Hero = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
                         >
-                            RutaKids permite a tu institución tener control, eficiencia y confianza en cada trayecto.
-                            Transforma la experiencia escolar con tecnología de primer nivel.
+                            {t('subtitle')}
                         </motion.p>
 
                         <motion.p
@@ -52,7 +54,7 @@ const Hero = () => {
                             whileInView={{ opacity: 1 }}
                             transition={{ duration: 0.8, delay: 0.4 }}
                         >
-                            “Una herramienta que las familias aprecian, y los directivos necesitan.”
+                            {t('quote')}
                         </motion.p>
 
                         <motion.div
@@ -65,36 +67,37 @@ const Hero = () => {
                                 href="#contact"
                                 className="bg-blue-600 text-white font-medium px-8 py-3 rounded-xl hover:bg-blue-700 transition-all"
                             >
-                                Solicita una demo
+                                {t('demo')}
                             </a>
                             <a href="#funciona" className="text-blue-600 font-medium hover:underline px-6 py-3">
-                                Ver cómo funciona
+                                {t('how')}
                             </a>
                         </motion.div>
                     </div>
                 </div>
 
                 {/* Trusted By */}
-                <section className="w-full mt-16 px-4 md:px-0"
-                         initial={{opacity: 0, y: 40}}
-                         whileInView={{opacity: 1, y: 0}}
-                         viewport={{once: true}}
-                         transition={{duration: 0.8, delay: 0.2}}>
-
+                <section
+                    className="w-full mt-16 px-4 md:px-0"
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                >
                     <motion.p
                         className="uppercase text-sm text-gray-400 tracking-widest font-medium text-center"
-                        initial={{opacity: 0}}
-                        whileInView={{opacity: 1}}
-                        transition={{duration: 0.6}}
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ duration: 0.6 }}
                     >
-                        Confiado por las mejores instituciones educativas
+                        {t('trusted')}
                     </motion.p>
 
                     <motion.div
                         className="mt-10 flex flex-wrap items-center justify-center gap-8 md:gap-24"
-                        initial={{opacity: 0}}
-                        whileInView={{opacity: 1}}
-                        transition={{duration: 0.8, delay: 0.4}}
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ duration: 0.8, delay: 0.4 }}
                     >
                         <div className="mt-10 flex flex-wrap items-center justify-center gap-8 md:gap-24">
                             <img
@@ -122,7 +125,7 @@ const Hero = () => {
                 </section>
             </div>
         </section>
-);
+    );
 };
 
 export default Hero;

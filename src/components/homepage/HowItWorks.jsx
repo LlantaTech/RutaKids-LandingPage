@@ -1,39 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FaUserCheck, FaMapMarkedAlt, FaBell, FaSchool } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const steps = [
     {
-        title: "Registro del estudiante",
-        description:
-            "Los colegios registran a los estudiantes y asignan rutas y paradas para asegurar una experiencia segura desde el primer día.",
         icon: <FaUserCheck size={36} className="text-blue-600" />,
         video: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmxjNWNnMTZ2bGY0bnVkYTQ4amNlcnNpMXIwMTlzY2hnZXJpMnVmNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l4FGEfO2es6g8w4AU/giphy.gif"
     },
     {
-        title: "Monitoreo de ruta",
-        description:
-            "Monitorea en vivo el trayecto del bus escolar. Da a las familias la seguridad de saber dónde están sus hijos, en todo momento.",
         icon: <FaMapMarkedAlt size={36} className="text-blue-600" />,
         video: "https://media.giphy.com/media/QBd2kLB5qDmysEXre9/giphy.gif"
     },
     {
-        title: "Notificaciones automáticas",
-        description:
-            "Recibe alertas instantáneas cuando tu hijo sube o baja del bus. Porque cada segundo de tranquilidad cuenta.",
         icon: <FaBell size={36} className="text-blue-600" />,
         video: "https://i.gifer.com/7SPR.gif"
     },
     {
-        title: "Ingreso al colegio",
-        description:
-            "Confirma la llegada segura del estudiante al colegio. Seguridad garantizada desde el inicio hasta el aula.",
         icon: <FaSchool size={36} className="text-blue-600" />,
         video: "https://i.gifer.com/TngS.gif"
     }
 ];
 
 export default function HowItWorks({ forwardedRef }) {
+    const { t } = useTranslation("howItWorks");
+    const stepTexts = t("steps", { returnObjects: true });
+
     const [activeIndex, setActiveIndex] = useState(0);
     const [fadeIn, setFadeIn] = useState(true);
 
@@ -51,7 +43,7 @@ export default function HowItWorks({ forwardedRef }) {
     return (
         <section
             className="bg-white min-h-screen flex flex-col justify-center items-center px-6 py-16 sm:py-24 md:px-12 lg:px-24"
-              id="¿Cómo_funciona?"
+            id="¿Cómo_funciona?"
             ref={forwardedRef}
         >
             <motion.h2
@@ -61,7 +53,7 @@ export default function HowItWorks({ forwardedRef }) {
                 viewport={{ once: false }}
                 transition={{ duration: 0.7 }}
             >
-                ¿Cómo funciona?
+                {t("sectionTitle")}
             </motion.h2>
 
             <motion.p
@@ -71,11 +63,10 @@ export default function HowItWorks({ forwardedRef }) {
                 viewport={{ once: false }}
                 transition={{ duration: 0.7, delay: 0.2 }}
             >
-                Seguridad y tranquilidad en cada paso del camino escolar
+                {t("sectionSubtitle")}
             </motion.p>
 
             <div className="backdrop-blur-xl bg-white/60 border border-white/30 rounded-3xl shadow-2xl w-full max-w-screen-xl px-4 sm:px-6 md:p-14 py-10 transition-all duration-700 ease-in-out z-10 relative">
-                {/* Paso por íconos */}
                 <div className="flex flex-wrap justify-center sm:gap-8 md:gap-16 mb-12 sm:mb-16 relative">
                     {steps.map((step, idx) => (
                         <motion.div
@@ -122,12 +113,11 @@ export default function HowItWorks({ forwardedRef }) {
                     ))}
                 </div>
 
-                {/* Contenido del paso */}
                 <motion.div
                     className={`flex flex-col md:flex-row justify-between items-center gap-14 transition-all duration-700 ease-in-out transform ${
                         fadeIn ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                     }`}
-                    key={activeIndex} // fuerza reinicio animación al cambiar de paso
+                    key={activeIndex}
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7 }}
@@ -139,7 +129,7 @@ export default function HowItWorks({ forwardedRef }) {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6 }}
                         >
-                            Paso {activeIndex + 1} de {steps.length}
+                            {t("stepCounter", { current: activeIndex + 1, total: steps.length })}
                         </motion.p>
                         <motion.h3
                             className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 leading-tight"
@@ -147,7 +137,7 @@ export default function HowItWorks({ forwardedRef }) {
                             animate={{ opacity: 1 }}
                             transition={{ duration: 0.7, delay: 0.2 }}
                         >
-                            {steps[activeIndex].title}
+                            {stepTexts[activeIndex].title}
                         </motion.h3>
                         <motion.p
                             className="text-lg md:text-xl text-gray-700 font-medium leading-relaxed"
@@ -155,7 +145,7 @@ export default function HowItWorks({ forwardedRef }) {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.3 }}
                         >
-                            {steps[activeIndex].description}
+                            {stepTexts[activeIndex].description}
                         </motion.p>
                     </div>
 
@@ -176,7 +166,6 @@ export default function HowItWorks({ forwardedRef }) {
                 </motion.div>
             </div>
 
-            {/* Timer animation */}
             <style jsx>{`
                 .animate-circle-timer {
                     animation: countdownCircle 7s linear forwards;

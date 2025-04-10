@@ -1,0 +1,17 @@
+{
+  "title": "Ready to transform <1>school transport</1>?",
+  "subtitle": "Let’s talk. Whether to schedule a demo or resolve your doubts, our team is ready to help.",
+  "form": {
+    "name": "Name",
+    "email": "Email",
+    "message": "Write your message here...",
+    "submit": "Send message"
+  },
+  "errors": {
+    "name": "Name is required",
+    "email": "Email is required",
+    "invalid": "Invalid email",
+    "message": "Message is required"
+  },
+  "success": "Message sent successfully ✅"
+}

@@ -1,0 +1,17 @@
+{
+  "title": "¿Listo para transformar el <1>transporte escolar</1>?",
+  "subtitle": "Hablemos. Ya sea para agendar una demo o resolver tus dudas, nuestro equipo está listo para ayudarte.",
+  "form": {
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "message": "Escribe tu mensaje aquí...",
+    "submit": "Enviar mensaje"
+  },
+  "errors": {
+    "name": "El nombre es obligatorio",
+    "email": "El correo es obligatorio",
+    "invalid": "Correo inválido",
+    "message": "El mensaje es obligatorio"
+  },
+  "success": "Mensaje enviado exitosamente ✅"
+}

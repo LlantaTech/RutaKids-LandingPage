@@ -1,42 +1,45 @@
 import { useEffect, useRef, useState } from "react";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import gsap from "gsap";
+import { useTranslation } from "react-i18next";
 
 const team = [
     {
         name: "Abel Ortega",
         role: "CEO / Team Leader",
         image: "https://i.postimg.cc/9fBF7473/Abel.jpg",
-        videoTimestamp: 5,
+        videoTimestamp: 5
     },
     {
         name: "Mateo Vilchez",
         role: "Frontend Developer",
         image: "https://i.postimg.cc/pr32Hzgj/Mateo.jpg",
-        videoTimestamp: 15,
+        videoTimestamp: 15
     },
     {
         name: "Alex Avila",
         role: "Backend Developer",
         image: "https://i.postimg.cc/qRbJ19wj/Alex.jpg",
-        videoTimestamp: 25,
+        videoTimestamp: 25
     },
     {
         name: "Belen Ramos",
         role: "Frontend Developer",
         image: "https://i.postimg.cc/NFKgSpPY/Belen.jpg",
-        videoTimestamp: 35,
-    },
+        videoTimestamp: 35
+    }
 ];
 
 const positions = [
     { angle: 0, distance: 200, size: 300 },
     { angle: -1.28, distance: 170, size: 160 },
     { angle: 0.01, distance: 130, size: 110 },
-    { angle: 0.83, distance: 170, size: 90 },
+    { angle: 0.83, distance: 170, size: 90 }
 ];
 
 export default function AboutUs() {
+    const { t } = useTranslation('aboutUs');
+
     const [order, setOrder] = useState(team);
     const [active, setActive] = useState(team[0]);
     const [player, setPlayer] = useState(null);
@@ -53,8 +56,8 @@ export default function AboutUs() {
         window.onYouTubeIframeAPIReady = () => {
             const ytPlayer = new window.YT.Player("team-video", {
                 events: {
-                    onReady: () => setPlayer(ytPlayer),
-                },
+                    onReady: () => setPlayer(ytPlayer)
+                }
             });
         };
     }, []);
@@ -132,14 +135,11 @@ export default function AboutUs() {
                 ref={titleRef}
                 className="text-3xl md:text-4xl font-bold text-center mb-10"
             >
-                Conoce al equipo detrás de <span className="text-blue-600">RutaKids</span>
+                {t('title')} <span className="text-blue-600">RutaKids</span>
             </h2>
 
             <div className="flex flex-col lg:flex-row gap-12 justify-center items-center w-full max-w-7xl">
-                <div
-                    ref={videoRef}
-                    className="w-full lg:w-[700px] max-w-full px-2"
-                >
+                <div ref={videoRef} className="w-full lg:w-[700px] max-w-full px-2">
                     <div className="aspect-video rounded-xl overflow-hidden shadow-2xl">
                         <iframe
                             id="team-video"
@@ -154,7 +154,6 @@ export default function AboutUs() {
                     </div>
                 </div>
 
-                {/* MODO ESCRITORIO */}
                 <div
                     ref={expositorRef}
                     className="relative w-full max-w-[580px] h-[580px] hidden md:block"
@@ -196,7 +195,7 @@ export default function AboutUs() {
                                 style={{
                                     transform: `translate(${centerX + x}px, ${centerY + y}px)`,
                                     width: `${size}px`,
-                                    height: `${size}px`,
+                                    height: `${size}px`
                                 }}
                                 className="absolute transition-all duration-700 rounded-full overflow-hidden shadow-md border-2 border-white cursor-pointer group"
                                 onClick={() => updateActive(member.name)}
@@ -234,7 +233,7 @@ export default function AboutUs() {
                     <div className="bg-blue-100 text-center p-4 rounded-xl w-full max-w-md shadow-md">
                         <h3 className="text-xl font-bold text-gray-900">{active.name}</h3>
                         <p className="text-blue-600 font-medium">{active.role}</p>
-                        <p className="text-gray-600 text-sm mt-1">Conecta RutaKids con los colegios del país.</p>
+                        <p className="text-gray-600 text-sm mt-1">{t('mobileNote')}</p>
                     </div>
                 </div>
             </div>
