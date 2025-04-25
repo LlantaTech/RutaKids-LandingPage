@@ -31,7 +31,7 @@ export default function ParentsSection({ forwardedRef }) {
                         transition={{ duration: 1, ease: 'easeOut' }}
                     >
                         <img
-                            src="https://codeminds-appsmoviles-sw65.github.io/CodeMinds-LandingPage/assets/atras.png"
+                            src="src/assets/images/ios.png"
                             alt="Mockup atras"
                             className="w-40 sm:w-48 md:w-56 lg:w-64 relative z-0 sm:translate-x-3 translate-x-10"
                         />
@@ -44,9 +44,9 @@ export default function ParentsSection({ forwardedRef }) {
                         transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
                     >
                         <img
-                            src="https://codeminds-appsmoviles-sw65.github.io/CodeMinds-LandingPage/assets/adelante.png"
+                            src="src/assets/images/android.png"
                             alt="Mockup adelante"
-                            className="w-40 sm:w-48 md:w-56 lg:w-64 relative z-10 sm:-translate-x-32 sm:translate-y-9 -translate-x-10 translate-y-10"
+                            className="w-40 sm:w-48 md:w-56 lg:w-64 relative z-10 sm:-translate-x-32 sm:translate-y-16 -translate-x-10 translate-y-10"
                         />
                     </motion.div>
                 </div>

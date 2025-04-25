@@ -65,9 +65,9 @@ export default function ForSchool({ forwardedRef }) {
                     transition={{ duration: 1, delay: 0.5 }}
                 >
                     <img
-                        src="https://t3.ftcdn.net/jpg/02/90/96/60/360_F_290966059_j5t9sJZrzOkXMC6fdqCK9QxvtfcFbAkB.jpg"
+                        src="src/assets/images/web.png"
                         alt="Dashboard plataforma web"
-                        className="max-w-md w-full shadow-2xl"
+                        className="max-w-md w-full"
                     />
                 </motion.div>
             </div>

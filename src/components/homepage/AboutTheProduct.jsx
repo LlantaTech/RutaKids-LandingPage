@@ -29,7 +29,7 @@ export default function AboutTheProduct() {
                 {/* VIDEO */}
                 <div className="mt-10 rounded-xl overflow-hidden shadow-xl border border-blue-200 w-full max-w-4xl mx-auto">
                     <iframe
-                        src="https://www.youtube.com/embed/mco3UX9SqDA?autoplay=1&mute=1&controls=1&loop=1"
+                        src="https://www.youtube.com/embed/um0ETkJABmI?autoplay=1&mute=1&controls=1&loop=1"
                         title="Video RutaKids"
                         allow="autoplay; encrypted-media"
                         allowFullScreen

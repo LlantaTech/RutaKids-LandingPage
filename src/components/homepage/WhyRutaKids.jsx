@@ -33,7 +33,7 @@ const bulletVariants = {
     })
 };
 
-// Iconos fijos (pueden cambiarse según orden de las features)
+
 const icons = [FaBusAlt, FaMobileAlt, FaChalkboardTeacher];
 
 export default function WhyRutaKids({ forwardedRef }) {
