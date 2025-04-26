@@ -12,6 +12,7 @@ import Contact from "./components/homepage/Contact.jsx";
 import Footer from "./components/ui/Footer.jsx";
 import AboutUs from "./components/homepage/AboutUs.jsx";
 import AboutTheProduct from "./components/homepage/AboutTheProduct.jsx";
+import LanguageSwitcher from "./components/ui/LanguageSwitcher.jsx";
 
 
 const App = () => {
@@ -48,7 +49,7 @@ const App = () => {
 
 
     return (
-        <div className="bg-white w-full overflow-x-hidden box-border">
+        <div className="bg-white w-full  box-border">
 
             <NavBar sectionRefs={sectionRefs.current}/>{" "}
             <main>
@@ -60,7 +61,7 @@ const App = () => {
                 <AboutUs/>
                 <AboutTheProduct forwardedRef={(el) => (sectionRefs.current[3] = el)}/>{" "}
                 <Contact/>
-
+                <LanguageSwitcher/>
             </main>
             <Footer/>
         </div>

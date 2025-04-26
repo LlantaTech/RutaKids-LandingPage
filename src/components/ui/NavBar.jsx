@@ -2,12 +2,16 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import Lenis from "@studio-freight/lenis";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useTranslation } from 'react-i18next';
+
 
 export default function NavBar({ sectionRefs }) {
   const navBar = useRef(null);
 
   const cta = useRef(null);
   const tl = gsap.timeline();
+  const { t } = useTranslation('navbar');
+
   gsap.registerPlugin(ScrollTrigger);
 
   useEffect(() => {
@@ -117,36 +121,38 @@ export default function NavBar({ sectionRefs }) {
         {/* Nav Links */}
         <nav
             className="absolute left-1/2 transform -translate-x-1/2 flex gap-6 items-center justify-center font-medium text-sm md:text-xl text-gray-800">
+
           <a href="#hero" className="relative group hidden md:inline-block">
-            <span>Inicio</span>
+            <span>{t('home')}</span>
             <span
                 className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-secondary-800 transition-all duration-300 group-hover:w-full"></span>
           </a>
+
           <a href="#¿Por_qué_elegirnos?" className="relative group hidden md:inline-block">
-            <span>Beneficios</span>
+            <span>{t('benefits')}</span>
             <span
                 className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-secondary-800 transition-all duration-300 group-hover:w-full"></span>
           </a>
           <a href="#¿Cómo_funciona?" className="relative group hidden md:inline-block">
-            <span>Características</span>
+            <span>{t('features')}</span>
             <span
                 className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-secondary-800 transition-all duration-300 group-hover:w-full"></span>
           </a>
 
-      <a href="#padres" className="relative group hidden md:inline-block">
-        <span>Para padres</span>
-        <span
-            className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-secondary-800 transition-all duration-300 group-hover:w-full"></span>
-      </a>
-      <a href="#colegios" className="relative group hidden md:inline-block">
-        <span>Para colegios</span>
-        <span
-            className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-secondary-800 transition-all duration-300 group-hover:w-full"></span>
-      </a>
+          <a href="#padres" className="relative group hidden md:inline-block">
+            <span>{t('parents')}</span>
+            <span
+                className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-secondary-800 transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="#colegios" className="relative group hidden md:inline-block">
+            <span>{t('schools')}</span>
+            <span
+                className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-secondary-800 transition-all duration-300 group-hover:w-full"></span>
+          </a>
 
 
           <a href="#contactanos" className="relative group hidden md:inline-block">
-            <span>Contáctenos</span>
+            <span>{t('contact')}</span>
             <span
                 className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-secondary-800 transition-all duration-300 group-hover:w-full"></span>
           </a>
@@ -159,7 +165,7 @@ export default function NavBar({ sectionRefs }) {
             href="#Login"
             className="ml-4 px-4 py-2 rounded-full bg-secondary-800 text-white hover:bg-transparent hover:text-secondary-800 border border-secondary-800 transition"
         >
-          Iniciar Sesión
+          {t('login')}
         </a>
       </header>
   );

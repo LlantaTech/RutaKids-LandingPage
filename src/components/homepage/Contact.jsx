@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation, Trans } from 'react-i18next';
 
 const fadeInUp = {
     hidden: { opacity: 0, y: 40 },
@@ -15,30 +16,23 @@ const fadeInUp = {
 };
 
 export default function Contact() {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        message: ''
-    });
-
+    const { t } = useTranslation('contact');
+    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
     const [errors, setErrors] = useState({});
 
     const handleChange = (e) => {
-        setFormData(prev => ({
-            ...prev,
-            [e.target.name]: e.target.value
-        }));
+        setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
     const validate = () => {
         const newErrors = {};
-        if (!formData.name.trim()) newErrors.name = 'El nombre es obligatorio';
+        if (!formData.name.trim()) newErrors.name = t('errors.name');
         if (!formData.email.trim()) {
-            newErrors.email = 'El correo es obligatorio';
+            newErrors.email = t('errors.email');
         } else if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/i.test(formData.email)) {
-            newErrors.email = 'Correo inválido';
+            newErrors.email = t('errors.invalid');
         }
-        if (!formData.message.trim()) newErrors.message = 'El mensaje es obligatorio';
+        if (!formData.message.trim()) newErrors.message = t('errors.message');
         return newErrors;
     };
 
@@ -46,9 +40,7 @@ export default function Contact() {
         e.preventDefault();
         const validationErrors = validate();
         if (Object.keys(validationErrors).length === 0) {
-            console.log('Formulario válido', formData);
-            // Aquí podrías usar EmailJS, enviar a API, etc.
-            alert("Mensaje enviado exitosamente ✅");
+            alert(t('success'));
             setFormData({ name: '', email: '', message: '' });
             setErrors({});
         } else {
@@ -57,12 +49,8 @@ export default function Contact() {
     };
 
     return (
-        <section
-            id="contactanos"
-            className="w-full min-h-screen bg-white py-24 px-6 md:px-20 flex flex-col justify-center items-center"
-        >
+        <section id="contactanos" className="w-full min-h-screen bg-white py-24 px-6 md:px-20 flex flex-col justify-center items-center">
             <div className="max-w-screen-xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-                {/* Texto + Formulario */}
                 <motion.div
                     className="space-y-8"
                     initial="hidden"
@@ -70,39 +58,23 @@ export default function Contact() {
                     viewport={{ once: false, amount: 0.3 }}
                     variants={fadeInUp}
                 >
-                    <motion.h2
-                        className="text-4xl sm:text-5xl font-extrabold text-gray-900"
-                        custom={0}
-                        variants={fadeInUp}
-                    >
-                        ¿Listo para transformar el <span className="text-blue-600">transporte escolar</span>?
+                    <motion.h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900" custom={0} variants={fadeInUp}>
+                        <Trans i18nKey="title">
+                            ¿Listo para transformar el <span className="text-blue-600">transporte escolar</span>?
+                        </Trans>
                     </motion.h2>
 
-                    <motion.p
-                        className="text-lg text-gray-700"
-                        custom={0.1}
-                        variants={fadeInUp}
-                    >
-                        Hablemos. Ya sea para agendar una demo o resolver tus dudas, nuestro equipo está listo para ayudarte.
+                    <motion.p className="text-lg text-gray-700" custom={0.1} variants={fadeInUp}>
+                        {t('subtitle')}
                     </motion.p>
 
-                    <motion.form
-                        onSubmit={handleSubmit}
-                        className="space-y-4"
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: false, amount: 0.3 }}
-                    >
-                        <motion.div
-                            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-                            custom={0.2}
-                            variants={fadeInUp}
-                        >
+                    <motion.form onSubmit={handleSubmit} className="space-y-4" initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.3 }}>
+                        <motion.div className="grid grid-cols-1 sm:grid-cols-2 gap-4" custom={0.2} variants={fadeInUp}>
                             <div>
                                 <input
                                     type="text"
                                     name="name"
-                                    placeholder="Nombre"
+                                    placeholder={t('form.name')}
                                     value={formData.name}
                                     onChange={handleChange}
                                     className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition ${
@@ -115,7 +87,7 @@ export default function Contact() {
                                 <input
                                     type="email"
                                     name="email"
-                                    placeholder="Correo electrónico"
+                                    placeholder={t('form.email')}
                                     value={formData.email}
                                     onChange={handleChange}
                                     className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition ${
@@ -129,7 +101,7 @@ export default function Contact() {
                         <motion.div custom={0.3} variants={fadeInUp}>
                             <textarea
                                 name="message"
-                                placeholder="Escribe tu mensaje aquí..."
+                                placeholder={t('form.message')}
                                 rows="5"
                                 value={formData.message}
                                 onChange={handleChange}
@@ -146,12 +118,11 @@ export default function Contact() {
                             custom={0.4}
                             variants={fadeInUp}
                         >
-                            Enviar mensaje
+                            {t('form.submit')}
                         </motion.button>
                     </motion.form>
                 </motion.div>
 
-                {/* Mapa */}
                 <motion.div
                     className="w-full h-full"
                     initial={{ opacity: 0, x: 40 }}

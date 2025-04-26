@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
+import { useTranslation } from 'react-i18next';
 
 export default function Footer() {
+  const { t } = useTranslation('footer');
   const currentYear = new Date().getFullYear();
 
   const toTop = () => {
@@ -22,13 +24,13 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-bold text-blue-800 mb-2">RUTAKIDS</h3>
             <p className="text-sm text-gray-600">
-              Conecta colegios y familias con herramientas seguras para el transporte escolar.
+              {t('description')}
             </p>
           </div>
 
           {/* Contacto */}
           <div>
-            <h4 className="font-semibold text-blue-800 mb-2">Contacto</h4>
+            <h4 className="font-semibold text-blue-800 mb-2">{t('contact')}</h4>
             <ul className="text-sm space-y-2">
               <li>
                 <a
@@ -66,7 +68,7 @@ export default function Footer() {
 
           {/* Ubicación + redes */}
           <div>
-            <h4 className="font-semibold text-blue-800 mb-2">Ubicación</h4>
+            <h4 className="font-semibold text-blue-800 mb-2">{t('location')}</h4>
             <p className="text-sm mb-3">
               Prolongación Primavera 2390, Santiago de Surco, Lima
             </p>
@@ -75,7 +77,7 @@ export default function Footer() {
                 { icon: 'mdi:twitter', label: 'Twitter' },
                 { icon: 'mdi:linkedin', label: 'LinkedIn' },
                 { icon: 'mdi:youtube', label: 'YouTube' },
-                {icon:'mdi:github', label: 'GitHub'},
+                { icon: 'mdi:github', label: 'GitHub' }
               ].map((item, idx) => (
                   <a
                       key={idx}
@@ -98,14 +100,14 @@ export default function Footer() {
         {/* Copyright + back to top */}
         <div className="mt-10 flex flex-col md:flex-row justify-between items-center border-t border-gray-300 pt-6 text-sm">
           <p className="text-gray-500">
-            &copy; {currentYear} LlantaTech. All rights reserved.
+            &copy; {currentYear} LlantaTech. {t('rights')}
           </p>
           <button
               onClick={toTop}
               className="flex items-center gap-2 mt-4 md:mt-0 text-blue-700 hover:text-blue-900 transition group"
           >
           <span className="font-semibold uppercase tracking-wide group-hover:underline">
-            Back to top
+            {t('back')}
           </span>
             <Icon
                 icon="mdi:arrow-up-bold"

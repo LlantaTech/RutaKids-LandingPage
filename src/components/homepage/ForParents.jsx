@@ -1,31 +1,19 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaBell, FaMapMarkedAlt, FaCheckCircle, FaClock } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
-const features = [
-    {
-        icon: <FaBell className="text-blue-600 text-xl" />,
-        title: 'Notificaciones automáticas',
-        description: 'Alertas al instante cuando el estudiante sube o baja del bus.',
-    },
-    {
-        icon: <FaMapMarkedAlt className="text-blue-600 text-xl" />,
-        title: 'Ubicación en tiempo real',
-        description: 'Sigue el trayecto del bus desde el celular.',
-    },
-    {
-        icon: <FaCheckCircle className="text-blue-600 text-xl" />,
-        title: 'Confirmación de llegada',
-        description: 'Recibe confirmación automática al llegar al colegio.',
-    },
-    {
-        icon: <FaClock className="text-blue-600 text-xl" />,
-        title: 'Historial completo',
-        description: 'Accede a registros de viajes y asistencia escolar.',
-    },
+const icons = [
+    <FaBell className="text-blue-600 text-xl" />,
+    <FaMapMarkedAlt className="text-blue-600 text-xl" />,
+    <FaCheckCircle className="text-blue-600 text-xl" />,
+    <FaClock className="text-blue-600 text-xl" />
 ];
 
-export default function  ParentsSection ({ forwardedRef }) {
+export default function ParentsSection({ forwardedRef }) {
+    const { t } = useTranslation('forParents');
+    const features = t('features', { returnObjects: true });
+
     return (
         <section
             id="padres"
@@ -43,7 +31,7 @@ export default function  ParentsSection ({ forwardedRef }) {
                         transition={{ duration: 1, ease: 'easeOut' }}
                     >
                         <img
-                            src="https://codeminds-appsmoviles-sw65.github.io/CodeMinds-LandingPage/assets/atras.png"
+                            src="src/assets/images/ios.png"
                             alt="Mockup atras"
                             className="w-40 sm:w-48 md:w-56 lg:w-64 relative z-0 sm:translate-x-3 translate-x-10"
                         />
@@ -56,9 +44,9 @@ export default function  ParentsSection ({ forwardedRef }) {
                         transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
                     >
                         <img
-                            src="https://codeminds-appsmoviles-sw65.github.io/CodeMinds-LandingPage/assets/adelante.png"
+                            src="src/assets/images/android.png"
                             alt="Mockup adelante"
-                            className="w-40 sm:w-48 md:w-56 lg:w-64 relative z-10 sm:-translate-x-32 sm:translate-y-9 -translate-x-10 translate-y-10"
+                            className="w-40 sm:w-48 md:w-56 lg:w-64 relative z-10 sm:-translate-x-32 sm:translate-y-16 -translate-x-10 translate-y-10"
                         />
                     </motion.div>
                 </div>
@@ -71,7 +59,7 @@ export default function  ParentsSection ({ forwardedRef }) {
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
                     >
-                        Una app poderosa para los padres, tranquilidad para tu colegio
+                        {t('title')}
                     </motion.h2>
 
                     <motion.p
@@ -80,10 +68,9 @@ export default function  ParentsSection ({ forwardedRef }) {
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                     >
-                        RutaKids conecta a las familias con el colegio en tiempo real. Estas funciones mejoran la experiencia del padre y reducen la carga del colegio:
+                        {t('subtitle')}
                     </motion.p>
 
-                    {/* Tarjetas minimalistas funcionales */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
                         {features.map((item, i) => (
                             <motion.div
@@ -95,7 +82,7 @@ export default function  ParentsSection ({ forwardedRef }) {
                                 transition={{ duration: 0.5, delay: 0.2 * i }}
                             >
                                 <div className="flex items-start gap-3">
-                                    <div className="mt-1">{item.icon}</div>
+                                    <div className="mt-1">{icons[i]}</div>
                                     <div>
                                         <h4 className="font-semibold text-gray-800 text-base mb-1">{item.title}</h4>
                                         <p className="text-sm text-gray-600">{item.description}</p>
@@ -105,14 +92,13 @@ export default function  ParentsSection ({ forwardedRef }) {
                         ))}
                     </div>
 
-
                     <motion.p
                         className="text-base text-gray-600 italic mt-8 mb-8"
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         transition={{ delay: 0.5 }}
                     >
-                        “Un colegio que informa y cuida, es un colegio en el que las familias confían.”
+                        {t('quote')}
                     </motion.p>
 
                     <motion.div

@@ -71,6 +71,8 @@
   }
 }
 
+
+
 @layer components {
   .button {
     @apply  bg-accent-300 px-8 py-3 text-secondary-200 rounded-full
@@ -78,9 +80,20 @@
 }
 
 @layer utilities {
+
+  body {
+    scrollbar-width: none;           /* Firefox */
+    -ms-overflow-style: none;        /* IE 10+ */
+  }
+
+  body::-webkit-scrollbar {
+    display: none;                   /* Chrome, Safari y Opera */
+  }
+
   .title {
     clip-path: polygon(0 0, 200% 0, 100% 100%, 0% 100%);
     line-height: clamp(6rem, 16vw, 10rem); /* Set the desired line height */
+
 
   }
 
@@ -92,4 +105,16 @@
   .section-heading {
     clip-path: polygon(0 0, 100% 0%, 100% 100%, 0 100%);
   }
+
+  /* Agrega esto en index.css o tu archivo global */
+  body {
+    scrollbar-width: none;           /* Firefox */
+    -ms-overflow-style: none;        /* IE 10+ */
+  }
+
+  body::-webkit-scrollbar {
+    display: none;                   /* Chrome, Safari y Opera */
+  }
+
 }
+

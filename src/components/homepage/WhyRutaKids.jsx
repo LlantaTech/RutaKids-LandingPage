@@ -1,16 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaBusAlt, FaMobileAlt, FaChalkboardTeacher } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 const iconVariants = {
     initial: { scale: 1, rotate: 0 },
     hover: {
         scale: 1.2,
         rotate: [0, 5, -5, 5, -5, 0],
-        transition: {
-            duration: 1.5,
-            ease: 'easeInOut'
-        }
+        transition: { duration: 1.5, ease: 'easeInOut' }
     }
 };
 
@@ -19,10 +17,7 @@ const titleVariants = {
     animate: {
         opacity: 1,
         y: 0,
-        transition: {
-            duration: 0.8,
-            ease: 'easeOut'
-        }
+        transition: { duration: 0.8, ease: 'easeOut' }
     }
 };
 
@@ -38,45 +33,18 @@ const bulletVariants = {
     })
 };
 
-const features = [
-    {
-        icon: FaBusAlt,
-        title: 'Control del transporte escolar',
-        description: 'Supervisa y gestiona de forma eficiente el transporte escolar con visibilidad en tiempo real.',
-        bullets: [
-            'Supervisa salidas y llegadas en tiempo real',
-            'Tecnología RFID integrada',
-            'Visibilidad total para el colegio'
-        ]
-    },
-    {
-        icon: FaMobileAlt,
-        title: 'Comunicación instantánea',
-        description: 'Mantén informadas a las familias con notificaciones automáticas y actualizaciones al instante.',
-        bullets: [
-            'Notificaciones automáticas a padres',
-            'Actualizaciones al momento',
-            'Mayor tranquilidad para las familias'
-        ]
-    },
-    {
-        icon: FaChalkboardTeacher,
-        title: 'Gestión eficiente para colegios',
-        description: 'Administra rutas, asistencia y estudiantes desde un panel web intuitivo y centralizado.',
-        bullets: [
-            'Panel web intuitivo y accesible',
-            'Administra rutas, asistencia y más',
-            'Optimización operativa diaria'
-        ]
-    }
-];
+
+const icons = [FaBusAlt, FaMobileAlt, FaChalkboardTeacher];
 
 export default function WhyRutaKids({ forwardedRef }) {
+    const { t } = useTranslation('whyRutaKids');
+    const features = t('features', { returnObjects: true });
+
     return (
         <section
             id="¿Por_qué_elegirnos?"
             ref={forwardedRef}
-            className="bg-blue-50  min-h-screen flex flex-col justify-center items-center px-6 py-16 sm:py-24 md:px-12 lg:px-24"
+            className="bg-blue-50 min-h-screen flex flex-col justify-center items-center px-6 py-16 sm:py-24 md:px-12 lg:px-24"
         >
             <motion.p
                 className="text-lg sm:text-xl font-medium text-blue-600 uppercase tracking-wide mb-2 text-center"
@@ -85,7 +53,7 @@ export default function WhyRutaKids({ forwardedRef }) {
                 viewport={{ once: false }}
                 transition={{ duration: 0.6 }}
             >
-                ¿Por qué elegirnos?
+                {t('sectionLabel')}
             </motion.p>
             <motion.h2
                 className="text-3xl sm:text-5xl font-semibold text-gray-900 mb-16 text-center"
@@ -94,12 +62,12 @@ export default function WhyRutaKids({ forwardedRef }) {
                 whileInView="animate"
                 viewport={{ once: false }}
             >
-                Descubre los beneficios de RutaKids
+                {t('sectionTitle')}
             </motion.h2>
 
             <div className="grid gap-16 md:grid-cols-3">
                 {features.map((feature, index) => {
-                    const IconComponent = feature.icon;
+                    const IconComponent = icons[index];
                     return (
                         <motion.div
                             key={index}
