@@ -39,10 +39,10 @@ const positions = [
 
 export default function AboutUs() {
     const { t } = useTranslation('aboutUs');
-
     const [order, setOrder] = useState(team);
     const [active, setActive] = useState(team[0]);
     const [player, setPlayer] = useState(null);
+
     const sectionRef = useRef(null);
     const titleRef = useRef(null);
     const videoRef = useRef(null);
@@ -62,20 +62,78 @@ export default function AboutUs() {
         };
     }, []);
 
+    const animateSection = () => {
+        const ctx = gsap.context(() => {
+            const tl = gsap.timeline({
+                defaults: { duration: 1, ease: "power3.out" }
+            });
+
+            tl.fromTo(
+                titleRef.current,
+                { y: 40, opacity: 0, clipPath: "inset(0 0 100% 0)" },
+                { y: 0, opacity: 1, clipPath: "inset(0 0 0% 0)" }
+            )
+                .fromTo(
+                    videoRef.current,
+                    { opacity: 0, y: 30, scale: 0.95 },
+                    { opacity: 1, y: 0, scale: 1 },
+                    "-=0.6"
+                )
+                .fromTo(
+                    expositorRef.current,
+                    { opacity: 0, y: 40, scale: 0.9 },
+                    { opacity: 1, y: 0, scale: 1 },
+                    "-=0.7"
+                );
+        }, sectionRef);
+
+        return () => ctx.revert();
+    };
+
     useEffect(() => {
         if (!player) return;
+
+        const resetStyles = () => {
+            gsap.set(titleRef.current, {
+                opacity: 0,
+                y: 40,
+                clipPath: "inset(0 0 100% 0)"
+            });
+            gsap.set(videoRef.current, {
+                opacity: 0,
+                y: 30,
+                scale: 0.95
+            });
+            gsap.set(expositorRef.current, {
+                opacity: 0,
+                y: 40,
+                scale: 0.9
+            });
+        };
+
+        let lastVisible = false;
+
         const observer = new IntersectionObserver(
             ([entry]) => {
-                if (entry.isIntersecting) {
-                    player.playVideo();
+                const isVisible = entry.isIntersecting;
+
+                if (!lastVisible && isVisible) {
                     animateSection();
-                } else {
+                    player.playVideo();
+                } else if (lastVisible && !isVisible) {
+                    resetStyles();
                     player.pauseVideo();
                 }
+
+                lastVisible = isVisible;
             },
-            { threshold: 0.5 }
+            { threshold: 0.3 }
         );
-        if (sectionRef.current) observer.observe(sectionRef.current);
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
         return () => observer.disconnect();
     }, [player]);
 
@@ -94,23 +152,23 @@ export default function AboutUs() {
         return () => clearInterval(interval);
     }, [player, active]);
 
-    const animateSection = () => {
+    useEffect(() => {
+        if (!expositorRef.current) return;
+
         gsap.fromTo(
-            titleRef.current,
-            { y: -30, opacity: 0 },
-            { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
+            expositorRef.current.querySelector("img"),
+            { scale: 0.9, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 0.6, ease: "power2.out" }
         );
-        gsap.fromTo(
-            videoRef.current,
-            { x: -50, opacity: 0 },
-            { x: 0, opacity: 1, duration: 1, delay: 0.5, ease: "power3.out" }
-        );
-        gsap.fromTo(
-            expositorRef.current,
-            { x: 50, opacity: 0 },
-            { x: 0, opacity: 1, duration: 1, delay: 0.8, ease: "power3.out" }
-        );
-    };
+
+        if (window.innerWidth < 768) {
+            gsap.fromTo(
+                ".md\\:hidden .bg-blue-100",
+                { opacity: 0, y: 20 },
+                { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
+            );
+        }
+    }, [active]);
 
     const updateActive = (name) => {
         const idx = order.findIndex((m) => m.name === name);
@@ -182,8 +240,7 @@ export default function AboutUs() {
                     </div>
 
                     {order.map((member, idx) => {
-                        if (member.name === active.name) return null;
-                        if (idx >= positions.length) return null;
+                        if (member.name === active.name || idx >= positions.length) return null;
 
                         const { angle, distance, size } = positions[idx];
                         const x = Math.cos(angle) * distance;
@@ -197,8 +254,10 @@ export default function AboutUs() {
                                     width: `${size}px`,
                                     height: `${size}px`
                                 }}
-                                className="absolute transition-all duration-700 rounded-full overflow-hidden shadow-md border-2 border-white cursor-pointer group"
+                                className={`absolute transition-all duration-700 rounded-full overflow-hidden shadow-md border-2 border-white cursor-pointer group ${member.name}`}
                                 onClick={() => updateActive(member.name)}
+                                onMouseEnter={() => gsap.to(`.${member.name}`, { scale: 1.05, duration: 0.3 })}
+                                onMouseLeave={() => gsap.to(`.${member.name}`, { scale: 1, duration: 0.3 })}
                             >
                                 <img
                                     src={member.image}
@@ -216,9 +275,7 @@ export default function AboutUs() {
                         {team.map((member) => (
                             <div
                                 key={member.name}
-                                className={`w-16 h-16 rounded-full overflow-hidden border-2 transition-all cursor-pointer ${
-                                    member.name === active.name ? 'border-blue-500' : 'border-transparent grayscale hover:grayscale-0'
-                                }`}
+                                className={`w-16 h-16 rounded-full overflow-hidden border-2 transition-all cursor-pointer ${member.name === active.name ? 'border-blue-500' : 'border-transparent grayscale hover:grayscale-0'}`}
                                 onClick={() => updateActive(member.name)}
                             >
                                 <img

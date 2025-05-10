@@ -45,11 +45,11 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                    href="mailto:support@temporaly.com"
+                    href="mailto:llantatech.pe@gmail.com"
                     className="hover:text-blue-700 transition flex items-center gap-2"
                 >
                   <Icon icon="mdi:email-outline" className="text-blue-600" />
-                  support@temporaly.com
+                  llantatech.pe@gmail.com
                 </a>
               </li>
               <li>

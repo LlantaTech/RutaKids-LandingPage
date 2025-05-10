@@ -1,17 +1,26 @@
 {
-  "title": "Ready to transform <1>school transport</1>?",
-  "subtitle": "Let’s talk. Whether to schedule a demo or resolve your doubts, our team is ready to help.",
+  "title": "Request a personalized meeting",
+  "subtitle": "Fill in the details and we will contact you to schedule an evaluation call.",
+  "success": "Request sent successfully.",
+  "error": "Error sending request.",
   "form": {
-    "name": "Name",
-    "email": "Email",
-    "message": "Write your message here...",
-    "submit": "Send message"
-  },
-  "errors": {
-    "name": "Name is required",
-    "email": "Email is required",
-    "invalid": "Invalid email",
-    "message": "Message is required"
-  },
-  "success": "Message sent successfully ✅"
+    "school": "School name",
+    "name": "Contact name",
+    "email": "Institutional email",
+    "position": "Position",
+    "roles": {
+      "director": "Principal",
+      "coordinator": "Coordinator",
+      "transport": "Transport manager",
+      "admin": "Administrative",
+      "other": "Other"
+    },
+    "vehicles": "Number of school vehicles",
+    "country": "Select your country",
+    "departamento": "Select a department",
+    "provincia": "Select a province",
+    "distrito": "Select a district",
+    "address": "Exact address",
+    "submit": "Submit request"
+  }
 }

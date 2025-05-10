@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { FaUserCheck, FaMapMarkedAlt, FaBell, FaSchool } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
@@ -28,6 +28,18 @@ export default function HowItWorks({ forwardedRef }) {
 
     const [activeIndex, setActiveIndex] = useState(0);
     const [fadeIn, setFadeIn] = useState(true);
+    const [inView, setInView] = useState(false);
+
+    const sectionRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => setInView(entry.isIntersecting),
+            { threshold: 0.4 }
+        );
+        if (sectionRef.current) observer.observe(sectionRef.current);
+        return () => observer.disconnect();
+    }, []);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -44,24 +56,27 @@ export default function HowItWorks({ forwardedRef }) {
         <section
             className="bg-white min-h-screen flex flex-col justify-center items-center px-6 py-16 sm:py-24 md:px-12 lg:px-24"
             id="¿Cómo_funciona?"
-            ref={forwardedRef}
+            ref={(el) => {
+                sectionRef.current = el;
+                if (forwardedRef) forwardedRef.current = el;
+            }}
         >
             <motion.h2
+                key={`title-${inView}`}
                 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-center text-gray-900 mb-2 z-10 relative"
-                initial={{ opacity: 0, y: -30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false }}
-                transition={{ duration: 0.7 }}
+                initial={{ opacity: 0, y: -40 }}
+                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: -40 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
             >
                 {t("sectionTitle")}
             </motion.h2>
 
             <motion.p
+                key={`subtitle-${inView}`}
                 className="text-lg sm:text-xl md:text-2xl pb-10 text-gray-600 mt-2 text-center max-w-2xl z-10 relative mb-10"
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false }}
-                transition={{ duration: 0.7, delay: 0.2 }}
+                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             >
                 {t("sectionSubtitle")}
             </motion.p>
@@ -79,7 +94,9 @@ export default function HowItWorks({ forwardedRef }) {
                                 }, 300);
                             }}
                             className={`relative cursor-pointer transition-all duration-500 flex items-center justify-center ${
-                                activeIndex === idx ? "scale-130 z-20" : "opacity-50 hover:opacity-100"
+                                activeIndex === idx
+                                    ? "scale-130 z-20"
+                                    : "opacity-50 hover:opacity-100"
                             }`}
                             initial={{ opacity: 0, scale: 0.9 }}
                             whileInView={{ opacity: 1, scale: 1 }}
@@ -113,73 +130,57 @@ export default function HowItWorks({ forwardedRef }) {
                     ))}
                 </div>
 
-                <motion.div
-                    className={`flex flex-col md:flex-row justify-between items-center gap-14 transition-all duration-700 ease-in-out transform ${
-                        fadeIn ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                    }`}
-                    key={activeIndex}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7 }}
-                >
-                    <div className="w-full md:w-1/2">
-                        <motion.p
-                            className="uppercase text-sm text-blue-500 font-semibold mb-2 tracking-wide"
-                            initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6 }}
-                        >
-                            {t("stepCounter", { current: activeIndex + 1, total: steps.length })}
-                        </motion.p>
-                        <motion.h3
-                            className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 leading-tight"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.7, delay: 0.2 }}
-                        >
-                            {stepTexts[activeIndex].title}
-                        </motion.h3>
-                        <motion.p
-                            className="text-lg md:text-xl text-gray-700 font-medium leading-relaxed"
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.3 }}
-                        >
-                            {stepTexts[activeIndex].description}
-                        </motion.p>
-                    </div>
-
+                <AnimatePresence mode="wait">
                     <motion.div
-                        className="w-full md:w-1/2 flex justify-center"
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.6, delay: 0.4 }}
+                        key={activeIndex}
+                        className="flex flex-col md:flex-row justify-between items-center gap-14"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 20 }}
+                        transition={{ duration: 0.6 }}
                     >
-                        <div className="bg-black w-full max-w-lg h-56 md:h-64 rounded-2xl shadow-xl overflow-hidden">
-                            <img
-                                src={steps[activeIndex].video}
-                                alt="Paso visual"
-                                className="w-full h-full object-cover"
-                            />
+                        <div className="w-full md:w-1/2">
+                            <p className="uppercase text-sm text-blue-500 font-semibold mb-2 tracking-wide">
+                                {t("stepCounter", {
+                                    current: activeIndex + 1,
+                                    total: steps.length
+                                })}
+                            </p>
+                            <h3 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 leading-tight">
+                                {stepTexts[activeIndex].title}
+                            </h3>
+                            <p className="text-lg md:text-xl text-gray-700 font-medium leading-relaxed">
+                                {stepTexts[activeIndex].description}
+                            </p>
+                        </div>
+
+                        <div className="w-full md:w-1/2 flex justify-center">
+                            <div className="bg-black w-full max-w-lg h-56 md:h-64 rounded-2xl shadow-xl overflow-hidden">
+                                <img
+                                    src={steps[activeIndex].video}
+                                    alt="Paso visual"
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
                         </div>
                     </motion.div>
-                </motion.div>
+                </AnimatePresence>
             </div>
 
-            <style jsx>{`
-                .animate-circle-timer {
-                    animation: countdownCircle 7s linear forwards;
-                }
+            <style>{`
+        .animate-circle-timer {
+          animation: countdownCircle 7s linear forwards;
+        }
 
-                @keyframes countdownCircle {
-                    from {
-                        stroke-dashoffset: 0;
-                    }
-                    to {
-                        stroke-dashoffset: 188;
-                    }
-                }
-            `}</style>
+        @keyframes countdownCircle {
+          from {
+            stroke-dashoffset: 0;
+          }
+          to {
+            stroke-dashoffset: 188;
+          }
+        }
+      `}</style>
         </section>
     );
 }

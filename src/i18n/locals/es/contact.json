@@ -1,17 +1,26 @@
 {
-  "title": "¿Listo para transformar el <1>transporte escolar</1>?",
-  "subtitle": "Hablemos. Ya sea para agendar una demo o resolver tus dudas, nuestro equipo está listo para ayudarte.",
+  "title": "Solicita una reunión personalizada",
+  "subtitle": "Completa los datos y te contactaremos para coordinar una videollamada de evaluación.",
+  "success": "Solicitud enviada con éxito.",
+  "error": "Error al enviar solicitud.",
   "form": {
-    "name": "Nombre",
-    "email": "Correo electrónico",
-    "message": "Escribe tu mensaje aquí...",
-    "submit": "Enviar mensaje"
-  },
-  "errors": {
-    "name": "El nombre es obligatorio",
-    "email": "El correo es obligatorio",
-    "invalid": "Correo inválido",
-    "message": "El mensaje es obligatorio"
-  },
-  "success": "Mensaje enviado exitosamente ✅"
+    "school": "Nombre del colegio",
+    "name": "Nombre del contacto",
+    "email": "Correo institucional",
+    "position": "Cargo",
+    "roles": {
+      "director": "Director(a)",
+      "coordinator": "Coordinador(a)",
+      "transport": "Encargado de transporte",
+      "admin": "Administrativo",
+      "other": "Otro"
+    },
+    "vehicles": "Cantidad de vehículos escolares",
+    "country": "Seleccione su país",
+    "departamento": "Seleccione un departamento",
+    "provincia": "Seleccione una provincia",
+    "distrito": "Seleccione un distrito",
+    "address": "Dirección exacta",
+    "submit": "Enviar solicitud"
+  }
 }

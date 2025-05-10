@@ -1,70 +1,50 @@
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect,useRef } from "react";
+import React, { Suspense } from 'react';
+import { useInView } from 'react-intersection-observer';
 
-import NavBar from "./components/ui/NavBar";
-import Hero from './components/homepage/Hero';
-import WhyRutaKids from "./components/homepage/WhyRutaKids.jsx";
-import HowItWorks from "./components/homepage/HowItWorks.jsx";
-import ForParents from "./components/homepage/ForParents.jsx";
-import ForSchool from "./components/homepage/ForSchool.jsx";
-import Contact from "./components/homepage/Contact.jsx";
-import Footer from "./components/ui/Footer.jsx";
-import AboutUs from "./components/homepage/AboutUs.jsx";
-import AboutTheProduct from "./components/homepage/AboutTheProduct.jsx";
-import LanguageSwitcher from "./components/ui/LanguageSwitcher.jsx";
+import NavBar from './components/ui/NavBar';
+import Footer from './components/ui/Footer';
+import LanguageSwitcher from './components/ui/LanguageSwitcher';
 
+const Hero = React.lazy(() => import('./components/homepage/Hero'));
+const WhyRutaKids = React.lazy(() => import('./components/homepage/WhyRutaKids'));
+const HowItWorks = React.lazy(() => import('./components/homepage/HowItWorks'));
+const ForParents = React.lazy(() => import('./components/homepage/ForParents'));
+const ForSchool = React.lazy(() => import('./components/homepage/ForSchool'));
+const AboutUs = React.lazy(() => import('./components/homepage/AboutUs'));
+const AboutTheProduct = React.lazy(() => import('./components/homepage/AboutTheProduct'));
+const Contact = React.lazy(() => import('./components/homepage/Contact'));
+
+
+const LazySection = ({ Component }) => {
+    const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
+    return (
+        <div ref={ref}>
+            {inView && (
+                <Suspense fallback={<div style={{ height: '100vh' }}>Cargando...</div>}>
+                    <Component />
+                </Suspense>
+            )}
+        </div>
+    );
+};
 
 const App = () => {
-
-    gsap.registerPlugin(ScrollTrigger);
-    const sectionRefs = useRef([]); // Creating a sectionRefs array
-
-    // Scrub animation of section headings
-    useEffect(() => {
-        //TODO Learn useContext and useRef here
-        const sectionHeadings = document.querySelectorAll(".section-heading");
-        sectionHeadings.forEach((heading) => {
-            const headings = heading.querySelectorAll(".heading");
-
-            headings.forEach((individualHeading) => {
-                ScrollTrigger.create({
-                    trigger: heading,
-                    start: "top 550px",
-                    end: "bottom 550px",
-                    animation: gsap.to(individualHeading, {
-                        opacity: 1,
-                        y: 0,
-                        ease: "power4.out",
-                        duration: 1,
-                    }),
-                    toggleActions: "play none none none",
-
-                });
-                ScrollTrigger.refresh()
-            });
-        });
-    }, []);
-
-
-
     return (
-        <div className="bg-white w-full  box-border">
-
-            <NavBar sectionRefs={sectionRefs.current}/>{" "}
-            <main>
-                <Hero/>
-                <WhyRutaKids forwardedRef={(el) => (sectionRefs.current[0] = el)}/>{" "}
-                <HowItWorks/>
-                <ForParents forwardedRef={(el) => (sectionRefs.current[1] = el)}/>{" "}
-                <ForSchool forwardedRef={(el) => (sectionRefs.current[2] = el)}/>{" "}
-                <AboutUs/>
-                <AboutTheProduct forwardedRef={(el) => (sectionRefs.current[3] = el)}/>{" "}
-                <Contact/>
-                <LanguageSwitcher/>
-            </main>
-            <Footer/>
-        </div>
+        <main>
+            <NavBar />
+            <Suspense fallback={<div style={{ height: '100vh' }}>Cargando...</div>}>
+                <Hero />
+            </Suspense>
+            <LazySection Component={WhyRutaKids} />
+            <LazySection Component={HowItWorks} />
+            <LazySection Component={ForParents} />
+            <LazySection Component={ForSchool} />
+            <AboutUs />
+            <LazySection Component={AboutTheProduct} />
+            <LazySection Component={Contact} />
+            <Footer />
+            <LanguageSwitcher />
+        </main>
     );
 };
 
