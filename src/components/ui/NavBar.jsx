@@ -1,21 +1,21 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import Lenis from "@studio-freight/lenis";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslation } from 'react-i18next';
-
+import { FaBars, FaTimes } from "react-icons/fa";
 
 export default function NavBar({ sectionRefs }) {
   const navBar = useRef(null);
-
   const cta = useRef(null);
-  const tl = gsap.timeline();
   const { t } = useTranslation('navbar');
+
+  const [menuOpen, setMenuOpen] = useState(false);
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   gsap.registerPlugin(ScrollTrigger);
 
   useEffect(() => {
-    // Smooth scroll
     const lenis = new Lenis();
     function raf(time) {
       lenis.raf(time);
@@ -24,9 +24,8 @@ export default function NavBar({ sectionRefs }) {
     requestAnimationFrame(raf);
   }, []);
 
-// Animación de entrada del navbar
   useEffect(() => {
-    tl.to(navBar.current, {
+    gsap.to(navBar.current, {
       y: 0,
       duration: 2,
       delay: 0.5,
@@ -34,65 +33,22 @@ export default function NavBar({ sectionRefs }) {
     });
   }, []);
 
-  useEffect(() => {
-    if (!sectionRefs || sectionRefs.length === 0) return;
-
-    sectionRefs.forEach((section) => {
-      const id = section.id;
-
-      const isWhite = ["hero", "contactanos", "¿Cómo_funciona?"].includes(id);
-      const isBlue = ["¿Por_qué_elegirnos?", "padres", "colegios"].includes(id);
-
-      const timeline = gsap.timeline({ defaults: { duration: 0.3, ease: "power2.out" } });
-
-      if (isWhite) {
-        timeline
-            .to(navBar.current, {
-              backgroundColor: "#ffffff",
-              color: "#2563EB",
-              immediateRender: false,
-            })
-            .to(cta.current, {
-              backgroundColor: "#2563EB",
-              color: "#ffffff",
-              border: "1px solid transparent",
-              immediateRender: false,
-            }, 0);
-      }
-
-      if (isBlue) {
-        timeline
-            .to(navBar.current, {
-              backgroundColor: "#EFF6FF",
-              color: "#2563EB",
-              immediateRender: false,
-            })
-            .to(cta.current, {
-              backgroundColor: "transparent",
-              color: "#2563EB",
-              border: "1px solid #2563EB",
-              immediateRender: false,
-            }, 0);
-      }
-
-      ScrollTrigger.create({
-        trigger: section,
-        start: "top 400px",
-        end: "bottom 300px",
-        animation: timeline,
-        toggleActions: "play reverse play reverse",
-      });
-    });
-  }, [sectionRefs]);
+  const navItems = [
+    { id: "hero", label: t('home') },
+    { id: "¿Por_qué_elegirnos?", label: t('benefits') },
+    { id: "¿Cómo_funciona?", label: t('features') },
+    { id: "padres", label: t('parents') },
+    { id: "colegios", label: t('schools') },
+    { id: "contactanos", label: t('contact') },
 
 
+  ];
 
   return (
       <header
           ref={navBar}
           className="fixed top-0 z-50 w-full -translate-y-full flex items-center justify-between bg-white px-5 py-3 shadow-md"
       >
-
         {/* Logo */}
         <a href="#hero" aria-label="Logo" className="flex items-center gap-2">
           <svg
@@ -118,55 +74,48 @@ export default function NavBar({ sectionRefs }) {
 
         </a>
 
-        {/* Nav Links */}
-        <nav
-            className="absolute left-1/2 transform -translate-x-1/2 flex gap-6 items-center justify-center font-medium text-sm md:text-xl text-gray-800">
 
-          <a href="#hero" className="relative group hidden md:inline-block">
-            <span>{t('home')}</span>
-            <span
-                className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-secondary-800 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-
-          <a href="#¿Por_qué_elegirnos?" className="relative group hidden md:inline-block">
-            <span>{t('benefits')}</span>
-            <span
-                className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-secondary-800 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="#¿Cómo_funciona?" className="relative group hidden md:inline-block">
-            <span>{t('features')}</span>
-            <span
-                className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-secondary-800 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-
-          <a href="#padres" className="relative group hidden md:inline-block">
-            <span>{t('parents')}</span>
-            <span
-                className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-secondary-800 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="#colegios" className="relative group hidden md:inline-block">
-            <span>{t('schools')}</span>
-            <span
-                className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-secondary-800 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-
-
-          <a href="#contactanos" className="relative group hidden md:inline-block">
-            <span>{t('contact')}</span>
-            <span
-                className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-secondary-800 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-
-
+        {/* Desktop Nav */}
+        <nav className="hidden lg:flex gap-6 items-center justify-center font-medium text-sm lg:text-body-1 text-gray-800">
+          {navItems.map(item => (
+              <a key={item.id} href={`#${item.id}`} className="relative group">
+                <span>{item.label}</span>
+                <span className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+              </a>
+          ))}
         </nav>
 
+        {/* CTA button */}
         <a
             ref={cta}
             href="#Login"
-            className="ml-4 px-4 py-2 rounded-full bg-secondary-800 text-white hover:bg-transparent hover:text-secondary-800 border border-secondary-800 transition"
+            className="ml-4 px-4 py-2 rounded-full bg-blue-600 text-white hover:bg-transparent hover:text-blue-600 border border-blue-600 transition hidden lg:inline-block"
         >
           {t('login')}
         </a>
+
+        {/* Mobile Menu Toggle */}
+        <button className="lg:hidden text-2xl text-gray-700" onClick={toggleMenu}>
+          {menuOpen ? <FaTimes /> : <FaBars />}
+        </button>
+
+        {/* Mobile Nav */}
+        {menuOpen && (
+            <div className="absolute top-full left-0 w-full bg-white shadow-lg py-4 px-6 space-y-4 lg:hidden">
+              {navItems.map(item => (
+                  <a key={item.id} href={`#${item.id}`} onClick={() => setMenuOpen(false)} className="block text-gray-800">
+                    {item.label}
+                  </a>
+              ))}
+              <a
+                  href="#Login"
+                  onClick={() => setMenuOpen(false)}
+                  className="block bg-blue-600 text-white text-center py-2 rounded-full hover:bg-blue-700"
+              >
+                {t('login')}
+              </a>
+            </div>
+        )}
       </header>
   );
 }

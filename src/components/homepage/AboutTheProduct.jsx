@@ -9,7 +9,7 @@ export default function AboutTheProduct() {
 
     return (
         <section
-            id="#about-the-product"
+            id="about-the-product"
             className="bg-blue-50  min-h-screen flex flex-col justify-center items-center px-6 py-16 sm:py-24 md:px-12 lg:px-24"
         >
             <motion.div
