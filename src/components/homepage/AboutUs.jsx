@@ -11,22 +11,22 @@ const team = [
         videoTimestamp: 5
     },
     {
-        name: "Mateo Vilchez",
-        role: "Frontend Developer",
-        image: "https://i.postimg.cc/pr32Hzgj/Mateo.jpg",
-        videoTimestamp: 15
-    },
-    {
         name: "Alex Avila",
         role: "Backend Developer",
         image: "https://i.postimg.cc/qRbJ19wj/Alex.jpg",
-        videoTimestamp: 25
+        videoTimestamp: 97
+    },
+    {
+        name: "Mateo Vilchez",
+        role: "Frontend Developer",
+        image: "https://i.postimg.cc/pr32Hzgj/Mateo.jpg",
+        videoTimestamp: 175
     },
     {
         name: "Belen Ramos",
         role: "Frontend Developer",
         image: "https://i.postimg.cc/NFKgSpPY/Belen.jpg",
-        videoTimestamp: 35
+        videoTimestamp: 389
     }
 ];
 
@@ -203,7 +203,7 @@ export default function AboutUs() {
                             id="team-video"
                             width="100%"
                             height="100%"
-                            src="https://www.youtube.com/embed/mco3UX9SqDA?enablejsapi=1&version=3"
+                            src="https://www.youtube.com/embed/OK4mNu6CAqc?enablejsapi=1&version=3"
                             title="RutaKids Team"
                             frameBorder="0"
                             allow="autoplay; encrypted-media"

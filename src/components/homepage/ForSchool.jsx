@@ -2,6 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaChartLine, FaRoute, FaExclamationTriangle, FaDownload } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
+import web from '/src/assets/images/web.png';
+
 
 export default function ForSchool({ forwardedRef }) {
     const { t } = useTranslation('forSchool');
@@ -63,7 +65,7 @@ export default function ForSchool({ forwardedRef }) {
                     transition={{ duration: 1, delay: 0.5 }}
                 >
                     <img
-                        src="src/assets/images/web.png"
+                        src={web}
                         alt="Dashboard plataforma web"
                         className="w-full max-w-[300px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] xl:max-w-[700px]"
                     />
