@@ -3,6 +3,9 @@ import { motion } from 'framer-motion';
 import { FaBell, FaMapMarkedAlt, FaCheckCircle, FaClock } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 
+import ios from '/src/assets/images/ios.png';
+import android from '/src/assets/images/android.png';
+
 const icons = [
     <FaBell className="text-blue-600 text-xl" />,
     <FaMapMarkedAlt className="text-blue-600 text-xl" />,
@@ -55,7 +58,7 @@ export default function ParentsSection({ forwardedRef }) {
                         transition={{ duration: 1, ease: 'easeOut' }}
                     >
                         <img
-                            src="src/assets/images/ios.png"
+                            src={ios}
                             alt="Mockup atras"
                             className="w-40 sm:w-48 md:w-56 lg:w-64 relative z-0 sm:translate-x-3 translate-x-12"
                         />
@@ -68,7 +71,7 @@ export default function ParentsSection({ forwardedRef }) {
                         transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
                     >
                         <img
-                            src="src/assets/images/android.png"
+                            src={android}
                             alt="Mockup adelante"
                             className="w-40 sm:w-48 md:w-56 lg:w-64 mx-auto sm:-translate-x-32 sm:translate-y-16 -translate-x-10 translate-y-10"
                         />
