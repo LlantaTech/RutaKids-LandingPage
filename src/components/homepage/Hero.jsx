@@ -28,7 +28,7 @@ const Hero = () => {
             <motion.div className="max-w-screen-xl w-full flex flex-col items-center justify-center text-center">
                 <div className="flex flex-col md:flex-row items-center justify-center gap-12 w-full">
                     <motion.div
-                        className="w-full md:w-1/2 flex justify-center"
+                        className="w-full md:w-2/3 flex justify-center"
                         variants={scaleFadeIn}
                         initial="hidden"
                         whileInView="show"
@@ -37,42 +37,43 @@ const Hero = () => {
                         <img
                             src={heroImg}
                             alt="RutaKids plataforma"
-                            className="max-w-lg w-full rounded-2xl shadow-xl"
+                            className="max-w-xl w-full rounded-2xl shadow-xl"
                         />
                     </motion.div>
 
-                    <div className="w-full md:w-1/2 text-center md:text-left">
-                        <motion.h1
-                            className="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight mb-6"
-                            variants={fadeInUp}
-                            initial="hidden"
-                            whileInView="show"
-                            viewport={{ once: true }}
-                        >
-                            <Trans i18nKey="title" t={t} components={{ 1: <span className="text-blue-600" /> }} />
-                        </motion.h1>
+                <div className="w-full md:w-2/3 text-center md:text-left">
+                            <motion.h1
+                                className="text-5xl sm:text-6xl font-extrabold text-gray-900 leading-tight mb-6 max-w-3xl"
+                                variants={fadeInUp}
+                                initial="hidden"
+                                whileInView="show"
+                                viewport={{ once: true }}
+                            >
+                                <Trans i18nKey="title" t={t} components={{ 1: <span className="text-blue-600" /> }} />
+                            </motion.h1>
 
-                        <motion.p
-                            className="text-lg sm:text-xl text-gray-600 leading-relaxed mb-4"
-                            variants={fadeInUp}
-                            initial="hidden"
-                            whileInView="show"
-                            transition={{ delay: 0.2 }}
-                            viewport={{ once: true }}
-                        >
-                            {t('subtitle')}
-                        </motion.p>
+                            <motion.p
+                                className="text-xl sm:text-2xl text-gray-600 leading-relaxed mb-4 max-w-3xl"
+                                variants={fadeInUp}
+                                initial="hidden"
+                                whileInView="show"
+                                transition={{ delay: 0.2 }}
+                                viewport={{ once: true }}
+                            >
+                                {t('subtitle')}
+                            </motion.p>
 
-                        <motion.p
-                            className="italic text-sm sm:text-base text-gray-500 mb-6"
-                            variants={fadeInUp}
-                            initial="hidden"
-                            whileInView="show"
-                            transition={{ delay: 0.4 }}
-                            viewport={{ once: true }}
-                        >
-                            {t('quote')}
-                        </motion.p>
+                            <motion.p
+                                className="italic text-base sm:text-lg text-gray-500 mb-6 max-w-3xl"
+                                variants={fadeInUp}
+                                initial="hidden"
+                                whileInView="show"
+                                transition={{ delay: 0.4 }}
+                                viewport={{ once: true }}
+                            >
+                                {t('quote')}
+                            </motion.p>
+
 
                         <motion.div
                             className="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start"

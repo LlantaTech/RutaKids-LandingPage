@@ -76,7 +76,7 @@ export default function NavBar({ sectionRefs }) {
 
 
         {/* Desktop Nav */}
-        <nav className="hidden lg:flex gap-6 items-center justify-center font-medium text-sm lg:text-body-1 text-gray-800">
+        <nav className="hidden lg:flex gap-6 items-center justify-center font-medium text-gray-800" style={{ fontSize: '18px' }}>
           {navItems.map(item => (
               <a key={item.id} href={`#${item.id}`} className="relative group">
                 <span>{item.label}</span>
