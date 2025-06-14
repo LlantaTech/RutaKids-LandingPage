@@ -191,7 +191,7 @@ export default function AboutUs() {
         >
             <h2
                 ref={titleRef}
-                className="text-3xl md:text-4xl font-bold text-center mb-10"
+                className="text-5xl sm:text-6xl font-extrabold text-center mb-10"
             >
                 {t('title')} <span className="text-blue-600">RutaKids</span>
             </h2>

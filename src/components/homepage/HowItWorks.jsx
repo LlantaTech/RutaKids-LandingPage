@@ -63,7 +63,7 @@ export default function HowItWorks({ forwardedRef }) {
         >
             <motion.h2
                 key={`title-${inView}`}
-                className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-center text-gray-900 mb-2 z-10 relative"
+                className="text-5xl sm:text-6xl font-extrabold text-center text-gray-900 mb-2 z-10 relative"
                 initial={{ opacity: 0, y: -40 }}
                 animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: -40 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
@@ -73,7 +73,7 @@ export default function HowItWorks({ forwardedRef }) {
 
             <motion.p
                 key={`subtitle-${inView}`}
-                className="text-lg sm:text-xl md:text-2xl pb-10 text-gray-600 mt-2 text-center max-w-2xl z-10 relative mb-10"
+                className="text-xl sm:text-2xl text-gray-600 mt-2 text-center max-w-2xl z-10 relative mb-10"
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
@@ -140,16 +140,16 @@ export default function HowItWorks({ forwardedRef }) {
                         transition={{ duration: 0.6 }}
                     >
                         <div className="w-full md:w-1/2">
-                            <p className="uppercase text-sm text-blue-500 font-semibold mb-2 tracking-wide">
+                            <p className="text-base sm:text-lg text-gray-700 font-medium leading-relaxed">
                                 {t("stepCounter", {
                                     current: activeIndex + 1,
                                     total: steps.length
                                 })}
                             </p>
-                            <h3 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 leading-tight">
+                            <h3 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4 leading-tight">
                                 {stepTexts[activeIndex].title}
                             </h3>
-                            <p className="text-lg md:text-xl text-gray-700 font-medium leading-relaxed">
+                            <p className="text-base sm:text-lg text-gray-700 font-medium leading-relaxed">
                                 {stepTexts[activeIndex].description}
                             </p>
                         </div>

@@ -4,6 +4,8 @@ import Lenis from "@studio-freight/lenis";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslation } from 'react-i18next';
 import { FaBars, FaTimes } from "react-icons/fa";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
 
 export default function NavBar({ sectionRefs }) {
   const navBar = useRef(null);
@@ -13,7 +15,20 @@ export default function NavBar({ sectionRefs }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
-  gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+  const scrollToSection = (id) => {
+    const target = document.getElementById(id);
+    if (target) {
+      gsap.to(window, {
+        duration: 1.2,
+        scrollTo: { y: target, offsetY: 70 },
+        ease: "power2.inOut",
+      });
+      setMenuOpen(false); // cierra el menú móvil si está abierto
+    }
+  };
+
 
   useEffect(() => {
     const lenis = new Lenis();
@@ -76,14 +91,19 @@ export default function NavBar({ sectionRefs }) {
 
 
         {/* Desktop Nav */}
-        <nav className="hidden lg:flex gap-6 items-center justify-center font-medium text-gray-800" style={{ fontSize: '18px' }}>
-          {navItems.map(item => (
-              <a key={item.id} href={`#${item.id}`} className="relative group">
+        <nav className="hidden lg:flex gap-6 items-center justify-center font-medium text-gray-800 text-[18px]">
+          {navItems.map((item) => (
+              <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className="relative group cursor-pointer bg-transparent border-none text-inherit"
+              >
                 <span>{item.label}</span>
                 <span className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
-              </a>
+              </button>
           ))}
         </nav>
+
 
         {/* CTA button */}
         <a

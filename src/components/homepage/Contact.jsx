@@ -87,28 +87,29 @@ export default function Contact() {
         <section id="contactanos" className="w-full min-h-screen bg-white py-24 px-6 md:px-20 flex flex-col justify-center items-center overflow-hidden">
             <div className="max-w-screen-xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
                 <motion.div className="space-y-6" initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.3 }} variants={fadeInUp}>
-                    <motion.h2 className="text-4xl font-extrabold text-gray-900" variants={fadeInUp} custom={0}>
+                    <motion.h2 className="text-5xl sm:text-6xl font-extrabold text-gray-900" variants={fadeInUp} custom={0}>
                         {t('title')}
                     </motion.h2>
-                    <motion.p className="text-gray-700 text-sm" variants={fadeInUp} custom={0.1}>
+                    <motion.p className="text-xl sm:text-xm text-gray-600 leading-relaxed" variants={fadeInUp} custom={0.1}>
                         {t('subtitle')}
                     </motion.p>
+
 
                     <motion.form className="space-y-4" onSubmit={handleSubmit}>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div className="relative">
-                                <FaBuilding className="absolute top-3 left-3 text-gray-400"/>
+                                <FaBuilding className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                                 <input type="text" name="school" placeholder={t('form.school')} value={formData.school} onChange={handleChange} className="w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-blue-500 focus:outline-none" required />
                             </div>
                             <div className="relative">
-                                <FaUser className="absolute top-3 left-3 text-gray-400"/>
+                                <FaUser className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"/>
                                 <input type="text" name="name" placeholder={t('form.name')} value={formData.name} onChange={handleChange} className="w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-blue-500 focus:outline-none" required />
                             </div>
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div className="relative">
-                                <FaUser className="absolute top-3 left-3 text-gray-400"/>
+                                <FaUser className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"/>
                                 <select name="position" value={formData.position} onChange={handleChange} className="w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-blue-500 focus:outline-none" required>
                                     <option value="">{t('form.position')}</option>
                                     <option>{t('form.roles.director')}</option>
@@ -119,18 +120,18 @@ export default function Contact() {
                                 </select>
                             </div>
                             <div className="relative">
-                                <FaEnvelope className="absolute top-3 left-3 text-gray-400"/>
+                                <FaEnvelope className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"/>
                                 <input type="email" name="email" placeholder={t('form.email')} value={formData.email} onChange={handleChange} className="w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-blue-500 focus:outline-none" required />
                             </div>
                         </div>
 
                         <div className="relative">
-                            <FaCar className="absolute top-3 left-3 text-gray-400"/>
+                            <FaCar className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"/>
                             <input type="number" name="vehicles" placeholder={t('form.vehicles')} value={formData.vehicles} onChange={handleChange} className="w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-blue-500 focus:outline-none" />
                         </div>
 
                         <div className="relative">
-                            <FaGlobe className="absolute top-3 left-3 text-gray-400"/>
+                            <FaGlobe className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"/>
                             <select name="country" value={formData.country} onChange={handleChange} className="w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-blue-500 focus:outline-none">
                                 <option value="">{t('form.country')}</option>
                                 <option>Perú</option>

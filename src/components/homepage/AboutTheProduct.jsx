@@ -20,7 +20,7 @@ export default function AboutTheProduct() {
                 className="text-center w-full max-w-5xl"
             >
                 {/* TITULO */}
-                <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-6 leading-snug">
+                <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-5 leading-tight">
                     <Trans i18nKey="title">
                         Conoce en 1 minuto por qué <span className="text-blue-600">RutaKids</span> es el futuro del transporte escolar
                     </Trans>
@@ -38,7 +38,7 @@ export default function AboutTheProduct() {
                 </div>
 
                 {/* FRASE */}
-                <p className="mt-8 text-gray-600 italic text-sm md:text-base px-4">
+                <p className="mt-8 italic text-base sm:text-lg text-gray-500 px-4">
                     {t("quote")}
                 </p>
             </motion.div>

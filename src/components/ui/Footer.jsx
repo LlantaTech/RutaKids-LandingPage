@@ -13,7 +13,7 @@ export default function Footer() {
 
   return (
       <motion.footer
-          className="w-full bg-blue-50 py-12 px-6 md:px-20 text-gray-700"
+          className="w-full bg-blue-50 pt-16 pb-24 px-6 md:px-20 text-gray-700"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -22,16 +22,16 @@ export default function Footer() {
         <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
           {/* Marca */}
           <div>
-            <h3 className="text-xl font-bold text-blue-800 mb-2">RUTAKIDS</h3>
-            <p className="text-sm text-gray-600">
+            <h3 className="text-2xl font-bold text-blue-800 mb-3">RUTAKIDS</h3>
+            <p className="text-[16px] text-gray-600">
               {t('description')}
             </p>
           </div>
 
           {/* Contacto */}
           <div>
-            <h4 className="font-semibold text-blue-800 mb-2">{t('contact')}</h4>
-            <ul className="text-sm space-y-2">
+            <h3 className="text-2xl font-bold text-blue-800 mb-3">{t('contact')}</h3>
+            <ul className="text-[16px] space-y-2">
               <li>
                 <a
                     href="https://wa.me/51989028007"
@@ -68,8 +68,8 @@ export default function Footer() {
 
           {/* Ubicación + redes */}
           <div>
-            <h4 className="font-semibold text-blue-800 mb-2">{t('location')}</h4>
-            <p className="text-sm mb-3">
+            <h3 className="text-2xl font-bold text-blue-800 mb-3">{t('location')}</h3>
+            <p className="text-[16px] mb-3">
               Prolongación Primavera 2390, Santiago de Surco, Lima
             </p>
             <div className="flex gap-4 mt-2">
@@ -84,10 +84,10 @@ export default function Footer() {
                       href="#"
                       target="_blank"
                       rel="noreferrer"
-                      className="group flex items-center space-x-1 text-gray-600 hover:text-blue-700 transition"
+                      className="group flex items-center space-x-1  text-gray-600 hover:text-blue-700 transition"
                   >
                     <Icon icon={item.icon} className="text-xl" />
-                    <span className="relative text-sm">
+                    <span className="relative text-[16px]">
                   {item.label}
                       <span className="absolute bottom-0 left-0 h-[0.10em] w-0 rounded-full bg-blue-700 transition-all duration-300 ease-in-out group-hover:w-full"></span>
                 </span>
@@ -99,7 +99,7 @@ export default function Footer() {
 
         {/* Copyright + back to top */}
         <div className="mt-10 flex flex-col md:flex-row justify-between items-center border-t border-gray-300 pt-6 text-sm">
-          <p className="text-gray-500">
+          <p className="text-gray-500 text-[19px]">
             &copy; {currentYear} LlantaTech. {t('rights')}
           </p>
           <button

@@ -48,7 +48,7 @@ export default function WhyRutaKids({ forwardedRef }) {
         >
             <motion.p
                 key={`label-${inView}`}
-                className="text-lg sm:text-xl font-medium text-blue-600 uppercase tracking-wide mb-2 text-center"
+                className="text-xl sm:text-2xl font-medium text-blue-600 uppercase tracking-wide mb-2 text-center"
                 initial={{ opacity: 0, x: 50 }}
                 animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
                 transition={{ duration: 0.8, ease: 'easeOut' }}
@@ -58,7 +58,7 @@ export default function WhyRutaKids({ forwardedRef }) {
 
             <motion.h2
                 key={`title-${inView}`}
-                className="text-3xl sm:text-5xl font-semibold text-gray-900 mb-16 text-center"
+                className="text-5xl sm:text-6xl font-extrabold text-gray-900 mb-16 text-center"
                 initial={{ opacity: 0, x: -50 }}
                 animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
                 transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
@@ -85,13 +85,13 @@ export default function WhyRutaKids({ forwardedRef }) {
                             >
                                 <IconComponent size={48} />
                             </motion.div>
-                            <h3 className="text-2xl sm:text-3xl font-semibold text-gray-800 mb-2">
+                            <h3 className="text-3xl sm:text-4xl font-semibold text-gray-800 mb-2">
                                 {feature.title}
                             </h3>
-                            <p className="text-base sm:text-xl text-gray-600 mb-4">
+                            <p className="text-xl sm:text-2xl text-gray-600 mb-4">
                                 {feature.description}
                             </p>
-                            <ul className="text-sm sm:text-base list-disc text-gray-700 space-y-2 pl-6">
+                            <ul className="text-base sm:text-lg list-disc text-gray-700 space-y-2 pl-6">
                                 {feature.bullets.map((bullet, i) => (
                                     <motion.li
                                         key={`bullet-${index}-${i}-${inView}`}
